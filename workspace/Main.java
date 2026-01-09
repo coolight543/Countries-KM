@@ -17,7 +17,7 @@ public class Main
   private ImageIcon img;
   private JLabel imageLabel;
   private JLabel outputLabel;
-  
+  private JTextArea userInput;
   public static void main(String[] args) {
     // Create the GUI
     Main gui = new Main();
@@ -48,7 +48,8 @@ public class Main
     // Use its get method to get the its image file name and save it into imagefile variable below instead of worldmap.jpg.
     String imagefile = "worldmap.jpg";
     // Use the following code to create an new Image Icon and put it into the GUI
-    img = new ImageIcon("/workspaces/Countries/workspace/"+imagefile);
+    System.out.println("printed map "+imagefile);
+    img = new ImageIcon("/workspaces/Countries-KM/workspace/"+imagefile);
     imageLabel.setIcon(img);
   }
   
@@ -97,9 +98,12 @@ public Main() {
         imageLabel = new JLabel(img);
         // and one for output
         outputLabel = new JLabel();
+        userInput = new JTextArea(1,40);
         jFrame.add(imageLabel);
+        jFrame.add(userInput);
         jFrame.add(outputLabel);
         jFrame.setVisible(true);
+       
         // add event listener for button click
         reviewButton.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) 
