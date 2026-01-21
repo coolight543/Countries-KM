@@ -24,14 +24,34 @@ public class Main
     gui.loadCountries();
     gui.showCountry();
   }
+  
 
   /* loadCountries() reads in the data from the countries-data.csv file and fills in the countryArray with data. You need to add the loop that reads in the country data into the array. */
   public void loadCountries() 
   {
+    try{
     // Open the data file. Please note that the file structure we're working with requires the full file path as shown here unlike what you saw in runestone where the file name was sufficient.
     File file = new File("/workspaces/Countries/workspace/countries-data.csv");
-    
+    Scanner scan = new Scanner(file);
+    // put code here
+    int i = 0;
+    while (scan.hasNextLine())
+    {
+      String info = scan.nextLine();
+      String[] values = info.split(",");
+      //create objects to put into array
+      countryArray[i] = new Country(values[0], values[1], values[2], values[3]);
+      i++;
+    }
+    scan.close();
+    }
+    catch(IOException e)
+    {
+      System.out.println("file couldn't be opened");
+    }
     //create a scanner and a loop to read from the file until you've read everything.
+      
+  
     // inside the loop you'll need to read in a line from the file and use "split" to break up the data into destinct parts.
     // create a new Country using your constructor with 4 arguments (each of the arguments is a different part of the line you've read in)
     // inside the loop, set countryArray[i] to the created Country object
@@ -44,9 +64,9 @@ public class Main
   */
   public void showCountry() {
     // Get the country at index from countryArray
-    
+    Country c = countryArray[index];
     // Use its get method to get the its image file name and save it into imagefile variable below instead of worldmap.jpg.
-    String imagefile = "worldmap.jpg";
+    String imagefile = c.getImageFile();
     // Use the following code to create an new Image Icon and put it into the GUI
     System.out.println("printed map "+imagefile);
     img = new ImageIcon("/workspaces/Countries-KM/workspace/"+imagefile);
@@ -56,12 +76,23 @@ public class Main
   /* nextButton should increment index. If the index is greater than 9, reset it back to 0. Clear the outputLabel to empty string using setText, and call showCountry();*/
   public void nextButtonClick()
   {
-    
+    index++;
+    if (index > 9)
+    {
+      index = 0; //reset to 0
+    }
+    outputLabel.setText("");
+    userInput.setText("");
+    showCountry();
   }
   
   /* reviewButton should get the country at index from the countryArray, call its toString() method and save the result, print it out with System.out.println and as an argument to outputLabel.setText( text to print out ); */
   public void reviewButtonClick()
   {
+    Country c = countryArray[index];
+    String info = c.toString();
+    System.out.println(info);
+    outputLabel.setText(info);
      
   }
 
@@ -69,11 +100,18 @@ public class Main
   */
   public void quizButtonClick()
   {
-    Scanner scan = new Scanner(System.in); 
-    
-    
-    
-  }
+    String userAnswer = userInput.getText();
+    Country c = countryArray[index];
+
+  if (userAnswer.equalsIgnoreCase(c.getName())) 
+    {
+    outputLabel.setText("Correct! That is " + c.getName());
+    } 
+  else 
+    {
+    outputLabel.setText("Incorrect. Try again!");
+    }  
+}
 
 
 
