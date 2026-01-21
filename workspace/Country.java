@@ -40,18 +40,6 @@ public class Country
   {
     return imageFile;
   }
-  public void setName(String name)
-  {
-    this.name = name;
-  }
-  public void setCapital(String capital)
-  {
-    this.capital = capital; 
-  }
-  public void setLanguage(String language)
-  {
-    this.language = language; 
-  }
 
   // Write a toString() method that returns a concatenated String of 3 of the instance variables in a sentence like "..'s capital is .. and its primary language is ..."
   public String toString()
