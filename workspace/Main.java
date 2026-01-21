@@ -23,14 +23,17 @@ public class Main
     Main gui = new Main();
     gui.loadCountries();
     gui.showCountry();
-  }
+    gui.nextButtonClick();
+    gui.reviewButtonClick();
+    gui.quizButtonClick();
+    }
   
 
   /* loadCountries() reads in the data from the countries-data.csv file and fills in the countryArray with data. You need to add the loop that reads in the country data into the array. */
   public void loadCountries() 
   {
     try{
-    // Open the data file. Please note that the file structure we're working with requires the full file path as shown here unlike what you saw in runestone where the file name was sufficient.
+    //Open the data file. Please note that the file structure we're working with requires the full file path as shown here unlike what you saw in runestone where the file name was sufficient.
     File file = new File("/workspaces/Countries/workspace/countries-data.csv");
     Scanner scan = new Scanner(file);
     // put code here
@@ -76,7 +79,7 @@ public class Main
   /* nextButton should increment index. If the index is greater than 9, reset it back to 0. Clear the outputLabel to empty string using setText, and call showCountry();*/
   public void nextButtonClick()
   {
-    index++;
+    int index = 0;
     if (index > 9)
     {
       index = 0; //reset to 0
@@ -84,6 +87,7 @@ public class Main
     outputLabel.setText("");
     userInput.setText("");
     showCountry();
+    index++;
   }
   
   /* reviewButton should get the country at index from the countryArray, call its toString() method and save the result, print it out with System.out.println and as an argument to outputLabel.setText( text to print out ); */
@@ -103,7 +107,7 @@ public class Main
     String userAnswer = userInput.getText();
     Country c = countryArray[index];
 
-  if (userAnswer.equalsIgnoreCase(c.getName())) 
+  if (userAnswer.equals(c.getName())) 
     {
     outputLabel.setText("Correct! That is " + c.getName());
     } 
